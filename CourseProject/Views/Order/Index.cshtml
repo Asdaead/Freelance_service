@@ -1,0 +1,29 @@
+﻿<div class="container">
+    @{
+        CategoryContext categoryContext = new CategoryContext();
+        var order = ViewBag.order;
+        {
+            <h2 class="mt-5">
+                @order.ShortDesc
+            </h2>
+            <h4>
+                Цена: @order.Price
+            </h4>
+            <h6 class="lead">
+                Категория: @categoryContext.getNameById(order.CategoryId)
+            </h6>
+            <p class="lead">
+                Описание: <br /> @order.LongDesc
+            </p>
+            @if (ViewBag.UserId != order.AccountId && User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Request" asp-action="Add" asp-route-orderId="@order.Id">Откликнуться</a>
+                <a href="">Показать контакты</a>
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+                <a a asp-controller="Order" asp-action="Update" asp-route-orderId="@order.Id">Изменить заказ</a>
+            }
+        }
+    }
+</div>

@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Personal";
+}
+
+<div>
+    <h2>
+        Ваши заказы
+    </h2>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#orders">Мои заказы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#requests">Мои отклики</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#ordersrequests">Отклики на мои заказы</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="orders">
+            <div><a asp-controller="Order" asp-action="Add">Добавить заказ</a></div>
+            @{
+                foreach (var order in ViewBag.Orders)
+                {
+                    <div class="container border">
+                        <h3 class="mt-5"><a asp-controller="Order" asp-action="Index" asp-route-id="@order.Id">@order.ShortDesc</a></h3>
+                        <h6 class="lead">@order.Price</h6>
+                        <p class="lead">@order.LongDesc</p>
+                    </div>
+                }
+            }
+        </div>
+        <div class="tab-pane fade show" id="requests">
+            @{
+                foreach (var request in ViewBag.Requests)
+                {
+                    <div class="container border">
+                        <h3 class="mt-5">@request.Date</h3>
+                        <p class="lead">@request.Text</p>
+                    </div>
+                }
+            }
+        </div>
+        <div class="tab-pane fade show " id="ordersrequests">
+            @{
+                foreach (var request in ViewBag.OrdersRequest)
+                {
+                        <div class="container border">
+                            <h3 class="mt-5">@request.Date</h3>
+                            <p class="lead">@request.Text</p>
+                        </div>
+                }
+            }
+        </div>
+    </div>
+</div>

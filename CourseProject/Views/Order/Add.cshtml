@@ -1,0 +1,28 @@
+﻿@model CourseProject.ViewModels.AddOrderModel
+
+<h2>Добавление заказа</h2>
+
+<form asp-action="Add" asp-controller="Order">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <div>
+        <div>
+            <label asp-for="ShortDesc">Краткое описание заказа</label><br />
+            <input type="text" asp-for="ShortDesc" />
+        </div>
+        <div>
+            <label asp-for="CategoryId">Category</label>
+            <select asp-for="CategoryId" asp-items="ViewBag.Categories"></select>
+        </div>
+        <div>
+            <label asp-for="LongDesc">Описание: </label><br />
+            <textarea class="form-control" rows="3" asp-for="LongDesc"></textarea>
+        </div>
+        <div>
+            <label asp-for="Price">Введите цену: </label><br />
+            <input asp-for="Price" />
+        </div>
+        <div>
+            <input type="submit" value="Добавить заказ" />
+        </div>
+    </div>
+</form>

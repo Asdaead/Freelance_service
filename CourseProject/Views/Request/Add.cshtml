@@ -1,0 +1,22 @@
+﻿
+@model CourseProject.ViewModels.AddRequestModel
+
+<h2>Добавление отклика</h2>
+@{
+    var OrderId = ViewBag.OrderId;
+    <form asp-action="Add" asp-controller="Request">
+        <div>
+            <div class="invisible">
+                <label asp-for="OrderId">Id заказа: </label><br/>
+                <input readonly="readonly" type="text" asp-for="OrderId" />
+            </div>
+            <div>
+                <label asp-for="Text">Описание: </label><br/>
+                <textarea class="form-control" rows="3" asp-for="Text"></textarea><br />
+            </div>
+            <div>
+                <input type="submit" value="Добавить отклик" />
+            </div>
+        </div>
+    </form>
+    }
