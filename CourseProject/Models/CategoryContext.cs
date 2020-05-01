@@ -24,7 +24,7 @@ namespace CourseProject.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=127.0.0.1;port=3307;database=freelance;Password=12colombo90;UserId=root;convert zero datetime=True;charset=utf8");
+            optionsBuilder.UseMySql("server=127.0.0.1;port=3307;database=freelance;Password=111;UserId=root;convert zero datetime=True;");
         }
     }
 }
