@@ -13,12 +13,10 @@
                 <div class="container border">
                     <h3 class="mt-5"><a asp-controller="Order" asp-action="Index" asp-route-id="@order.Id">@order.ShortDesc</a></h3>
                     <h6 class="lead">@order.Price</h6>
-                    <h6 class="lead">@categoryContext.getNameById(order.CategoryId)</h6>
-                    <p class="lead">@order.LongDesc</p>
+                    <h6 class="lead">Категория: @categoryContext.getNameById(order.CategoryId)</h6>
                     @if (ViewBag.UserId != order.AccountId && User.Identity.IsAuthenticated)
                     {
                         <a asp-controller="Request" asp-action="Add" asp-route-orderId="@order.Id">Откликнуться</a>
-                        <a href="">Показать контакты</a>
                     }
                 </div>
             }

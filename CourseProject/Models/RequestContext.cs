@@ -18,7 +18,7 @@ namespace CourseProject.Models
         public IEnumerable<Request> getAccountRequests(string login)
         {
             var accountId = accountContext.findIdByLogin(login);
-            var requests = Requests.ToList().Where(x => x.AccountId == accountId);
+            var requests = Requests.ToList().Where(x => x.AccountId == accountId && orderContext.findOrderById(x.OrderId) != "");
             return requests;
         }
         public IEnumerable<Request> getOrdersRequest(string login)
@@ -28,7 +28,7 @@ namespace CourseProject.Models
             IEnumerable<Request> allOrdersRequests = new List<Request>();
             foreach (var order in accountOrders)
             {
-                IEnumerable<Request> orderRequests = Requests.ToList().Where(x => x.AccountId == order.Id);
+                IEnumerable<Request> orderRequests = Requests.ToList().Where(x => x.AccountId == order.Id && orderContext.findOrderById(x.OrderId) != "");
                 allOrdersRequests = allOrdersRequests.Concat(orderRequests).ToList();
             }
             return allOrdersRequests.OrderByDescending(x => x.Date);

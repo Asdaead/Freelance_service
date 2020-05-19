@@ -18,7 +18,6 @@
             @if (ViewBag.UserId != order.AccountId && User.Identity.IsAuthenticated)
             {
                 <a asp-controller="Request" asp-action="Add" asp-route-orderId="@order.Id">Откликнуться</a>
-                <a href="">Показать контакты</a>
             }
             else if (User.Identity.IsAuthenticated)
             {

@@ -4,9 +4,6 @@
 }
 
 <div>
-    <h2>
-        Ваши заказы
-    </h2>
     <ul class="nav">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#orders">Мои заказы</a>
@@ -22,6 +19,8 @@
         <div class="tab-pane fade show active" id="orders">
             <div><a asp-controller="Order" asp-action="Add">Добавить заказ</a></div>
             @{
+                AccountContext accountContext = new AccountContext();
+                OrderContext orderContext = new OrderContext();
                 foreach (var order in ViewBag.Orders)
                 {
                     <div class="container border">
@@ -36,19 +35,27 @@
             @{
                 foreach (var request in ViewBag.Requests)
                 {
-                    <div class="container border">
-                        <h3 class="mt-5">@request.Date</h3>
-                        <p class="lead">@request.Text</p>
-                    </div>
+                    //var order = @orderContext.findOrderById(request.OrderId);
+                    //if (order != null && order != "")
+                    {
+                        <div class="container border">
+                            <h3 class="mt-5">Заказ: <a asp-controller="Order" asp-action="Index" asp-route-id="@request.OrderId">@orderContext.findOrderById(request.OrderId)</a></h3>
+                            <h3 class="mt-5">Дата отклика: @request.Date</h3>
+                            <p class="lead">@request.Text</p>
+                        </div>
+                        }
+                    }
                 }
-            }
         </div>
         <div class="tab-pane fade show " id="ordersrequests">
             @{
                 foreach (var request in ViewBag.OrdersRequest)
                 {
                         <div class="container border">
-                            <h3 class="mt-5">@request.Date</h3>
+                            <h3 class="mt-5">Заказ: <a asp-controller="Order" asp-action="Index" asp-route-id="@request.OrderId">@orderContext.findOrderById(request.OrderId)</a></h3>
+                            <h3 class="mt-5">Дата отклика: @request.Date</h3>
+                            <h4 class="mt-5">Пользователь: @accountContext.findLoginById(request.AccountId)</h4>
+                            <h4 class="mt-5">Почта: @accountContext.findEmailById(request.AccountId)</h4>
                             <p class="lead">@request.Text</p>
                         </div>
                 }

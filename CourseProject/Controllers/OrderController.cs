@@ -69,10 +69,28 @@ namespace CourseProject.Controllers
 
             return RedirectToAction("Success", "Order");
         }
-
+            
         public IActionResult Success()
         {
             return View();
+        }
+
+        public ViewResult Search(string id)
+        {
+            IEnumerable<Order> orders = null;
+            if (string.IsNullOrEmpty(id))
+                orders = orderContext.Orders.OrderBy(x => x.Date).ToList();
+            else
+                orders = orderContext.Orders.Where(x => x.ShortDesc.Contains(id) || x.LongDesc.Contains(id));
+
+            var gameObj = new SearchModel
+            {
+                allOrders = orders,
+                SearchString = id
+            };
+            var userId = accountContext.findIdByLogin(User.Identity.Name);
+            ViewBag.UserId = userId;
+            return View(gameObj);
         }
     }
 }

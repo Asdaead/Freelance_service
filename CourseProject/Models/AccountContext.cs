@@ -18,6 +18,16 @@ namespace CourseProject.Models
             var account = Accounts.ToList().Where(x => x.Login == login);
             return (!account.Any())? 0 : account.First().Id;
         }
+        public string findLoginById(int id)
+        {
+            var account = Accounts.ToList().Where(x => x.Id == id);
+            return (!account.Any()) ? "" : account.First().Login;
+        }
+        public string findEmailById(int id)
+        {
+            var account = Accounts.ToList().Where(x => x.Id == id);
+            return (!account.Any()) ? "" : account.First().Email;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql("server=127.0.0.1;port=3307;database=freelance;Password=111;UserId=root;convert zero datetime=True;");
